@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0E1B29"
+    tools:context=".MainActivity">
+
+    <!-- Título con gradiente (usa un TextView + Shader desde código si deseas efecto real) -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACCESO AL SISTEMA"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#C412B2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="> CODIGO ROTO SECURITY PROTOCOL<"
+        android:textColor="#06B6D4"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/auth_required"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="[AUTENTICACION REQUERIDA]"
+        android:textColor="#4ADE80"
+        android:textSize="10sp"
+        app:layout_constraintTop_toBottomOf="@id/subtitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="4dp" />
+
+    <!-- Contenedor -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/form_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="#102033"
+        app:layout_constraintTop_toBottomOf="@id/auth_required"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="32dp"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Botones -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="16dp">
+
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="INICIAR SESION"
+                    android:backgroundTint="#1DB3CB"
+                    android:textColor="#FFFFFF"/>
+
+                <Button
+                    android:id="@+id/btn_register"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="REGISTRARSE"
+                    android:backgroundTint="#00000000"
+                    android:textColor="#1DB3CB"/>
+            </LinearLayout>
+
+            <!-- Usuario -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="USUARIO"
+                android:textColor="#1DB3CB"
+                android:textSize="12sp"/>
+
+            <EditText
+                android:id="@+id/et_usuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingresa tu usuario"
+                android:inputType="text"
+                android:backgroundTint="#1DB3CB"
+                android:drawableStart="@android:drawable/ic_menu_myplaces"
+                android:padding="10dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#66FFFFFF"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Contraseña -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CONTRASEÑA"
+                android:textColor="#1DB3CB"
+                android:textSize="12sp"/>
+
+            <EditText
+                android:id="@+id/et_contrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:backgroundTint="#1DB3CB"
+                android:drawableStart="@android:drawable/ic_lock_idle_lock"
+                android:drawableEnd="@android:drawable/ic_menu_view"
+                android:padding="10dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#66FFFFFF"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Botón Acceder -->
+            <Button
+                android:id="@+id/btn_acceder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="> ACCEDER <"
+                android:backgroundTint="#2196F3"
+                android:textColor="#FFFFFF"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

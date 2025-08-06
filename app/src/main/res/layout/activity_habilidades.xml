@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <!-- Botón Volver -->
+        <TextView
+            android:id="@+id/btn_volver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← VOLVER"
+            android:textColor="#00FFFF"
+            android:textSize="14sp"
+            android:background="@drawable/border_cyan"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="[ÁRBOL DE HABILIDADES]"
+            android:textColor="#00FFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <!-- Info Nivel y Skills -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nivel: 1"
+                android:textColor="#00FFFF"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Skills: 2"
+                android:textColor="#00FFFF"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- XP Disponible -->
+    <TextView
+        android:id="@+id/tv_xp_disponible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_layout"
+        android:layout_centerHorizontal="true"
+        android:text="XP Disponible: 0"
+        android:textColor="#00FFFF"
+        android:textSize="14sp"
+        android:padding="8dp" />
+
+    <!-- Contenedor principal del árbol -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tv_xp_disponible"
+        android:layout_above="@id/legend_layout"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <!-- Rama Ofensiva (Izquierda) -->
+            <!-- PING (Nivel 1) -->
+            <LinearLayout
+                android:id="@+id/skill_ping"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/skill_available_red"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_ping"
+                    android:tint="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PING"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- DDOS (Nivel 2) -->
+            <LinearLayout
+                android:id="@+id/skill_ddos"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_below="@id/skill_ping"
+                android:layout_alignStart="@id/skill_ping"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/skill_locked"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_lock"
+                    android:tint="#666666" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DDOS"
+                    android:textColor="#666666"
+                    android:textSize="9sp" />
+
+            </LinearLayout>
+
+            <!-- SOBRECARGA (Nivel 3) -->
+            <LinearLayout
+                android:id="@+id/skill_sobrecarga"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_below="@id/skill_ddos"
+                android:layout_alignStart="@id/skill_ddos"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/skill_locked"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_lock"
+                    android:tint="#666666" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SOBRECARGA"
+                    android:textColor="#666666"
+                    android:textSize="8sp" />
+
+            </LinearLayout>
+
+            <!-- Rama Defensiva (Centro) -->
+            <!-- DEBUG (Nivel 1) -->
+            <LinearLayout
+                android:id="@+id/skill_debug"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/skill_available_green"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_debug"
+                    android:tint="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DEBUG"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- OPTIMIZAR -->
+            <LinearLayout
+                android:id="@+id/skill_optimizar"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_toEndOf="@id/skill_debug"
+                android:layout_alignTop="@id/skill_debug"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/skill_locked"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_lock"
+                    android:tint="#666666" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OPTIMIZAR"
+                    android:textColor="#666666"
+                    android:textSize="8sp" />
+
+            </LinearLayout>
+
+            <!-- Rama Soporte (Inferior) -->
+            <!-- FIREWALL -->
+            <LinearLayout
+                android:id="@+id/skill_firewall"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@id/skill_sobrecarga"
+                android:layout_alignStart="@id/skill_ping"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/skill_available_blue"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_firewall"
+                    android:tint="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FIREWALL"
+                    android:textColor="#FFFFFF"
+                    android:textSize="9sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- ENCRIPTACIÓN -->
+            <LinearLayout
+                android:id="@+id/skill_encriptacion"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_toEndOf="@id/skill_firewall"
+                android:layout_alignTop="@id/skill_firewall"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/skill_locked"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_lock"
+                    android:tint="#666666" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ENCRIPTACIÓN"
+                    android:textColor="#666666"
+                    android:textSize="7sp" />
+
+            </LinearLayout>
+
+            <!-- Líneas de conexión (usando Views como líneas) -->
+            <View
+                android:layout_width="2dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/skill_ping"
+                android:layout_centerHorizontal="@id/skill_ping"
+                android:background="#00FFFF"
+                android:alpha="0.5" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/skill_ddos"
+                android:layout_centerHorizontal="@id/skill_ddos"
+                android:background="#00FFFF"
+                android:alpha="0.5" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/skill_sobrecarga"
+                android:layout_centerHorizontal="@id/skill_sobrecarga"
+                android:background="#00FFFF"
+                android:alpha="0.5" />
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="2dp"
+                android:layout_toEndOf="@id/skill_firewall"
+                android:layout_centerVertical="@id/skill_firewall"
+                android:background="#00FFFF"
+                android:alpha="0.5" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <!-- Panel de información lateral -->
+    <LinearLayout
+        android:id="@+id/info_panel"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/panel_border"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_info"
+            android:tint="#00FFFF"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecciona una habilidad"
+            android:textColor="#00FFFF"
+            android:textSize="12sp"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="para ver los detalles"
+            android:textColor="#00FFFF"
+            android:textSize="12sp"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <!-- Leyenda inferior -->
+    <LinearLayout
+        android:id="@+id/legend_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="16dp">
+
+        <!-- Ofensivo -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="32dp">
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="#FF4444"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ofensivo"
+                android:textColor="#00FFFF"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <!-- Defensivo -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="32dp">
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="#4444FF"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Defensivo"
+                android:textColor="#00FFFF"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <!-- Soporte -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="#44FF44"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Soporte"
+                android:textColor="#00FFFF"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

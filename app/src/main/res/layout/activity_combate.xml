@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical">
+
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <!-- Botón Huir -->
+        <TextView
+            android:id="@+id/btn_huir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← HUIR"
+            android:textColor="#FF4444"
+            android:textSize="14sp"
+            android:background="#2a0a0a"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="[COMBATE ACTIVO]"
+            android:textColor="#FF4444"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <!-- Info de turno -->
+        <TextView
+            android:id="@+id/tv_turno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Turno: TU"
+            android:textColor="#00FFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- Info de tiempo -->
+    <TextView
+        android:id="@+id/tv_tiempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Turno: JUGADOR | Tiempo: 4s"
+        android:textColor="#888888"
+        android:textSize="12sp"
+        android:padding="4dp" />
+
+    <!-- Arena de combate -->
+    <LinearLayout
+        android:id="@+id/arena_combate"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="20dp">
+
+        <!-- Jugador -->
+        <LinearLayout
+            android:id="@+id/player_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#0a3a3a"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center">
+
+            <!-- Avatar jugador -->
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="#00FFFF"
+                android:gravity="center"
+                android:text="🤖"
+                android:textSize="32sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Nombre jugador -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="JUGADOR"
+                android:textColor="#00FFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Stats jugador -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- HP -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="HP:"
+                        android:textColor="#00FFFF"
+                        android:textSize="12sp"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_player_hp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="100/100"
+                        android:textColor="#00FFFF"
+                        android:textSize="12sp"
+                        android:gravity="end" />
+
+                </LinearLayout>
+
+                <!-- Barra HP jugador -->
+                <ProgressBar
+                    android:id="@+id/progress_player_hp"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"
+                    android:max="100"
+                    android:progress="100"
+                    android:progressTint="#00FFFF"
+                    android:progressBackgroundTint="#003333"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- EN -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="EN:"
+                        android:textColor="#4488FF"
+                        android:textSize="12sp"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_player_en"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="50/50"
+                        android:textColor="#4488FF"
+                        android:textSize="12sp"
+                        android:gravity="end" />
+
+                </LinearLayout>
+
+                <!-- Barra EN jugador -->
+                <ProgressBar
+                    android:id="@+id/progress_player_en"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"
+                    android:max="50"
+                    android:progress="50"
+                    android:progressTint="#4488FF"
+                    android:progressBackgroundTint="#001133" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- VS -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VS"
+            android:textColor="#FF4444"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:alpha="0.7" />
+
+        <!-- Enemigo -->
+        <LinearLayout
+            android:id="@+id/enemy_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#3a0a0a"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginStart="10dp"
+            android:gravity="center">
+
+            <!-- Avatar enemigo -->
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="#FF4444"
+                android:gravity="center"
+                android:text="⚠️"
+                android:textSize="28sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Nombre enemigo -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Troyano Alpha"
+                android:textColor="#FF4444"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp" />
+
+            <!-- HP enemigo -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HP:"
+                    android:textColor="#FF4444"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/tv_enemy_hp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="60/80"
+                    android:textColor="#FF4444"
+                    android:textSize="12sp"
+                    android:gravity="end" />
+
+            </LinearLayout>
+
+            <!-- Barra HP enemigo -->
+            <ProgressBar
+                android:id="@+id/progress_enemy_hp"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:max="80"
+                android:progress="60"
+                android:progressTint="#FF4444"
+                android:progressBackgroundTint="#330000" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Panel de comandos -->
+    <LinearLayout
+        android:id="@+id/comandos_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="#0a2a2a"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Título comandos -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[COMANDOS DISPONIBLES]"
+            android:textColor="#00FFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Grid de comandos -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Comando PING -->
+            <LinearLayout
+                android:id="@+id/cmd_ping"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:background="#2a4a5a"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="#00AAFF"
+                    android:gravity="center"
+                    android:text="📡"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PING"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ataque básico (15-25 dmg, 10 EN)"
+                    android:textColor="#AAAAAA"
+                    android:textSize="9sp"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+            <!-- Comando FIREWALL -->
+            <LinearLayout
+                android:id="@+id/cmd_firewall"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:background="#2a5a4a"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp"
+                android:layout_marginStart="8dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="#00AA44"
+                    android:gravity="center"
+                    android:text="🛡️"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FIREWALL"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Defensa activa (25-40 dmg, 20 EN)"
+                    android:textColor="#AAAAAA"
+                    android:textSize="9sp"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Log de combate -->
+    <LinearLayout
+        android:id="@+id/log_panel"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#0a1a0a"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Título log -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[LOG DE COMBATE]"
+            android:textColor="#44FF44"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Contenido del log -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_combat_log"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Iniciando combate contra Troyano Alpha...\nJugador usa PING: 18 de daño\nTroyano Alpha contraataca: 12 de daño"
+                android:textColor="#44FF44"
+                android:textSize="11sp"
+                android:lineSpacingMultiplier="1.2"
+                android:fontFamily="monospace" />
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

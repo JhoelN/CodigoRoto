@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000">
+
+    <!-- Header con menús y estadísticas -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:background="#001a33">
+
+        <!-- Botones del menú izquierda -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="start">
+
+            <Button
+                android:id="@+id/btnMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@android:color/transparent"
+                android:text="≡ MENÚ"
+                android:textColor="#00FFFF"
+                android:textSize="12sp"
+                style="@style/Widget.Material3.Button.OutlinedButton" />
+
+            <Button
+                android:id="@+id/btnSkills"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@android:color/transparent"
+                android:text="⚡ SKILLS"
+                android:textColor="#00FFFF"
+                android:textSize="12sp"
+                style="@style/Widget.Material3.Button.OutlinedButton" />
+
+            <Button
+                android:id="@+id/btnItems"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:backgroundTint="@android:color/transparent"
+                android:text="⊕ ITEMS"
+                android:textColor="#00FFFF"
+                android:textSize="12sp"
+                style="@style/Widget.Material3.Button.OutlinedButton" />
+
+        </LinearLayout>
+
+        <!-- Estadísticas derecha -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/tvPlayerHp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HP: 100/100"
+                android:textColor="#00FFFF"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvPlayerEn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EN: 50/50"
+                android:textColor="#00FFFF"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvPlayerXp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="XP: 0"
+                android:textColor="#00FFFF"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Status del sistema -->
+    <TextView
+        android:id="@+id/tvSystemStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000033"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="[ESCANEANDO SISTEMA... OK] - POS: (1,1) - VEL: 0"
+        android:textColor="#00FFFF"
+        android:textSize="12sp"
+        android:fontFamily="monospace" />
+
+    <!-- Contenedor del tablero -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="16dp"
+        android:background="#001122">
+
+        <!-- Vista personalizada del tablero -->
+        <com.jhoelnarvaez.codigoroto.GameBoardView
+            android:id="@+id/gameBoard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+    <!-- Panel de controles de movimiento -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="#001122"
+        android:gravity="center">
+
+        <!-- Título de controles -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[CONTROLES DE MOVIMIENTO]"
+            android:textColor="#00FFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="15dp" />
+
+        <!-- Flecha arriba -->
+        <Button
+            android:id="@+id/btnMoveUp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:background="#2a5a8a"
+            android:text="▲"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:elevation="4dp" />
+
+        <!-- Flechas horizontales -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
+
+            <Button
+                android:id="@+id/btnMoveLeft"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="50dp"
+                android:background="#2a5a8a"
+                android:text="◄"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true"
+                android:elevation="4dp" />
+
+            <Button
+                android:id="@+id/btnMoveRight"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="#2a5a8a"
+                android:text="►"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true"
+                android:elevation="4dp" />
+
+        </LinearLayout>
+
+        <!-- Flecha abajo -->
+        <Button
+            android:id="@+id/btnMoveDown"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#2a5a8a"
+            android:text="▼"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:elevation="4dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
