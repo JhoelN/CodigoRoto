@@ -26,6 +26,19 @@ class MainActivity : AppCompatActivity() {
 
         gameBoard = findViewById(R.id.gameBoard)
 
+        findViewById<Button>(R.id.btnMenu).setOnClickListener {
+            startActivity(Intent(this, MenuActivity::class.java))
+            finish()
+        }
+
+        findViewById<Button>(R.id.btnSkills).setOnClickListener {
+            startActivity(Intent(this, HabilidadesActivity::class.java))
+        }
+
+        findViewById<Button>(R.id.btnItems).setOnClickListener {
+            startActivity(Intent(this, InventarioActivity::class.java))
+        }
+
         setupMovementButtons()
     }
 
@@ -47,24 +60,29 @@ class MainActivity : AppCompatActivity() {
         when (event) {
             GameEvent.ENEMY -> {
                 Toast.makeText(this, "¡Enemigo encontrado!", Toast.LENGTH_SHORT).show()
-                gameBoard.removeEnemyAt(gameBoard.getPlayerPosition().first, gameBoard.getPlayerPosition().second)
+                gameBoard.removeEnemyAt(
+                    gameBoard.getPlayerPosition().first,
+                    gameBoard.getPlayerPosition().second
+                )
                 startActivity(Intent(this, CombateActivity::class.java))
             }
 
             GameEvent.ITEM -> {
                 Toast.makeText(this, "¡Has recogido un ítem!", Toast.LENGTH_SHORT).show()
-                gameBoard.removeItemAt(gameBoard.getPlayerPosition().first, gameBoard.getPlayerPosition().second)
+                gameBoard.removeItemAt(
+                    gameBoard.getPlayerPosition().first,
+                    gameBoard.getPlayerPosition().second
+                )
                 startActivity(Intent(this, InventarioActivity::class.java))
             }
 
             GameEvent.GOLD -> {
                 Toast.makeText(this, "¡Encontraste el ítem dorado!", Toast.LENGTH_LONG).show()
                 gameBoard.removeGoldItem()
-                startActivity(Intent(this, MenuActivity::class.java))
+                startActivity(Intent(this, HabilidadesActivity::class.java))
             }
 
             else -> {
-                // Nada por ahora
             }
         }
     }

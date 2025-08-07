@@ -27,7 +27,7 @@
         <!-- Actividad de registro -->
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="true" />
 
         <!-- Actividad principal del juego/menu -->
         <activity
@@ -37,11 +37,11 @@
         <!-- Otras actividades del juego -->
         <activity
             android:name=".MenuActivity"
-            android:exported="false" />
+            android:exported="true" />
 
         <activity
             android:name=".CombateActivity"
-            android:exported="false" />
+            android:exported="true" />
 
         <activity
             android:name=".InventarioActivity"
@@ -49,7 +49,7 @@
 
         <activity
             android:name=".HabilidadesActivity"
-            android:exported="false" />
+            android:exported="true" />
 
     </application>
 

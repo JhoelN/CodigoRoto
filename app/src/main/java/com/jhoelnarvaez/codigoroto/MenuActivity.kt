@@ -16,10 +16,10 @@ class MenuActivity : AppCompatActivity() {
 
     private lateinit var tvBienvenida: TextView
     private lateinit var btnSalir: Button
-    private lateinit var btnNuevaPartida: Button
-    private lateinit var btnContinuar: Button
-    private lateinit var btnHabilidades: Button
     private lateinit var btnInventario: Button
+    private lateinit var btnHabilidades: Button
+    private lateinit var btnContinuar: Button
+    private lateinit var btnNuevaPartida: Button
 
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
@@ -38,27 +38,20 @@ class MenuActivity : AppCompatActivity() {
         // Vistas
         tvBienvenida = findViewById(R.id.tv_bienvenido)
         btnSalir = findViewById(R.id.btn_salir)
-        btnNuevaPartida = findViewById(R.id.btn_nueva_partida)
-        btnContinuar = findViewById(R.id.btn_continuar)
-        btnHabilidades = findViewById(R.id.btn_habilidades)
         btnInventario = findViewById(R.id.btn_inventario)
+        btnHabilidades = findViewById(R.id.btn_habilidades)
+        btnContinuar = findViewById(R.id.btn_continuar)
+        btnNuevaPartida = findViewById(R.id.btn_nueva_partida)
 
         // Mostrar nombre del usuario
         obtenerNombreUsuario()
 
-        // Botón Salir
-        btnSalir.setOnClickListener {
-            auth.signOut()
-            finish()
-        }
-
-        // Botones de navegación
+        // Acciones de navegación
         btnNuevaPartida.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
         btnContinuar.setOnClickListener {
-            // Aquí puedes usar otra Activity si tienes una lógica específica de continuar
             startActivity(Intent(this, MainActivity::class.java))
         }
 
@@ -68,6 +61,11 @@ class MenuActivity : AppCompatActivity() {
 
         btnInventario.setOnClickListener {
             startActivity(Intent(this, InventarioActivity::class.java))
+        }
+
+        btnSalir.setOnClickListener {
+            auth.signOut()
+            finish()
         }
     }
 

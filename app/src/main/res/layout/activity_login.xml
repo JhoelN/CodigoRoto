@@ -106,7 +106,7 @@
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="#1DB3CB"
                 android:drawableStart="@android:drawable/ic_menu_myplaces"
-                android:hint="@string/ingresa_usuario"
+                android:hint="@string/ingresa_correo"
                 android:inputType="text"
                 android:padding="10dp"
                 android:textColor="#FFFFFF"

@@ -2,12 +2,9 @@ package com.jhoelnarvaez.codigoroto
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.card.MaterialCardView
-import com.jhoelnarvaez.codigoroto.R
 
 class InventarioActivity : AppCompatActivity() {
 
@@ -15,10 +12,12 @@ class InventarioActivity : AppCompatActivity() {
     private lateinit var btnCompilar: Button
     private lateinit var btnLimpiar: Button
     private lateinit var btnVolverJuego: Button
+    private lateinit var txtContador: TextView
 
     private val selectedItems = mutableListOf<Int>()
 
     private lateinit var inventoryItems: List<MaterialCardView>
+    private lateinit var cantidadTextViews: List<TextView>
 
     private val itemNames = arrayOf(
         "Fragmento Básico", "Código Debug", "Kit de Exploits",
@@ -41,54 +40,63 @@ class InventarioActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inventario)
 
-        // Inicializar botones con IDs reales del XML
         btnVolver = findViewById(R.id.btnVolver)
         btnCompilar = findViewById(R.id.btnCompilar)
         btnLimpiar = findViewById(R.id.btnLimpiarSeleccion)
         btnVolverJuego = findViewById(R.id.btnVolverAlJuego)
+        txtContador = findViewById(R.id.txtContador)
 
-        // Obtener referencias a los CardView manualmente por orden de aparición en el layout
-        inventoryItems = listOf(
-            getCardViewAt(0), getCardViewAt(1), getCardViewAt(2),
-            getCardViewAt(3), getCardViewAt(4), getCardViewAt(5), getCardViewAt(6)
-        )
+        val grid = findViewById<GridLayout>(R.id.inventory_grid)
+        inventoryItems = List(7) { index ->
+            val view = grid.getChildAt(index)
+            if (view !is MaterialCardView) {
+                throw IllegalStateException("Elemento en posición $index no es un MaterialCardView")
+            }
+            view
+        }
+
+        cantidadTextViews = inventoryItems.map { card ->
+            val layout = card.getChildAt(0) as? LinearLayout
+                ?: throw IllegalStateException("MaterialCardView no tiene LinearLayout")
+            val cantidadView = layout.getChildAt(2) as? TextView
+                ?: throw IllegalStateException("No se encontró el TextView de cantidad")
+            cantidadView
+        }
 
         setupClickListeners()
         updateUI()
-    }
-
-    // Helper para obtener CardViews sin IDs
-    private fun getCardViewAt(index: Int): MaterialCardView {
-        val grid = findViewById<android.widget.GridLayout>(R.id.inventory_grid)
-        return grid.getChildAt(index) as MaterialCardView
     }
 
     private fun setupClickListeners() {
         btnVolver.setOnClickListener { finish() }
         btnVolverJuego.setOnClickListener { finish() }
         btnLimpiar.setOnClickListener { limpiarSeleccion() }
-
         btnCompilar.setOnClickListener { compilarFragmentos() }
 
         inventoryItems.forEachIndexed { index, card ->
-            card.setOnClickListener {
-                mostrarDetallesItem(index)
-            }
+            card.setOnClickListener { mostrarDetallesItem(index) }
             card.setOnLongClickListener {
-                toggleItemSelection(index)
+                seleccionarYMostrarItem(index)
                 true
             }
         }
     }
 
     private fun mostrarDetallesItem(index: Int) {
-        val mensaje = "${itemNames[index]}\n\n${itemDescriptions[index]}\n\nCantidad: ${itemCounts[index]}"
+        val mensaje = """
+            ${itemNames[index]}
+            
+            ${itemDescriptions[index]}
+            
+            Cantidad disponible: ${itemCounts[index]}
+        """.trimIndent()
+
         Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
     }
 
-    private fun toggleItemSelection(index: Int) {
+    private fun seleccionarYMostrarItem(index: Int) {
         if (itemCounts[index] <= 0) {
-            Toast.makeText(this, "No tienes este item disponible", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "No tienes este ítem disponible", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -101,8 +109,7 @@ class InventarioActivity : AppCompatActivity() {
         }
 
         updateUI()
-        val estado = if (selectedItems.contains(index)) "seleccionado" else "deseleccionado"
-        Toast.makeText(this, "${itemNames[index]} $estado", Toast.LENGTH_SHORT).show()
+        mostrarDetallesItem(index) // Mostrar descripción al seleccionar
     }
 
     private fun limpiarSeleccion() {
@@ -124,6 +131,7 @@ class InventarioActivity : AppCompatActivity() {
             append("\n¡Habilidad creada!")
         }
 
+        // Descontar uno de cada ítem seleccionado
         selectedItems.forEach {
             if (itemCounts[it] > 0) itemCounts[it]--
         }
@@ -138,5 +146,14 @@ class InventarioActivity : AppCompatActivity() {
         val habilitado = selectedItems.size >= 2
         btnCompilar.isEnabled = habilitado
         btnCompilar.alpha = if (habilitado) 1.0f else 0.4f
+
+        val totalItems = itemCounts.sum()
+        txtContador.text = "Items: $totalItems\nSeleccionados: ${selectedItems.size}"
+
+        cantidadTextViews.forEachIndexed { i, txt ->
+            val originalText = txt.text.toString()
+            val icon = originalText.split(" ")[0]
+            txt.text = "$icon x${itemCounts[i]}"
+        }
     }
 }

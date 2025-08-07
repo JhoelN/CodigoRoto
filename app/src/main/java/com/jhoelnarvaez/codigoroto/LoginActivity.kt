@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnAcceder.setOnClickListener {
-            val email = etUsuario.text.toString().trim() // aquí usamos usuario como email
+            val email = etUsuario.text.toString().trim()
             val password = etContrasena.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty()) {

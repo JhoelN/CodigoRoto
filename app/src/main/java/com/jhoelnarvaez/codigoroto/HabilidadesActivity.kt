@@ -1,7 +1,6 @@
 package com.jhoelnarvaez.codigoroto
 
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -51,13 +50,14 @@ class HabilidadesActivity : AppCompatActivity() {
 
         btnVolver.setOnClickListener { finish() }
 
-        skillPing.setOnClickListener { desbloquearHabilidad("PING") }
-        skillDdos.setOnClickListener { desbloquearHabilidad("DDOS") }
-        skillSobrecarga.setOnClickListener { desbloquearHabilidad("SOBRECARGA") }
-        skillDebug.setOnClickListener { desbloquearHabilidad("DEBUG") }
-        skillOptimizar.setOnClickListener { desbloquearHabilidad("OPTIMIZAR") }
-        skillFirewall.setOnClickListener { desbloquearHabilidad("FIREWALL") }
-        skillEncriptacion.setOnClickListener { desbloquearHabilidad("ENCRIPTACION") }
+        // Asignar listeners a cada habilidad
+        skillPing.setOnClickListener { intentarDesbloquear("PING") }
+        skillDdos.setOnClickListener { intentarDesbloquear("DDOS") }
+        skillSobrecarga.setOnClickListener { intentarDesbloquear("SOBRECARGA") }
+        skillDebug.setOnClickListener { intentarDesbloquear("DEBUG") }
+        skillOptimizar.setOnClickListener { intentarDesbloquear("OPTIMIZAR") }
+        skillFirewall.setOnClickListener { intentarDesbloquear("FIREWALL") }
+        skillEncriptacion.setOnClickListener { intentarDesbloquear("ENCRIPTACION") }
     }
 
     private fun cargarDatosJugador() {
@@ -66,20 +66,19 @@ class HabilidadesActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { doc ->
                 xpDisponible = doc.getLong("xp")?.toInt() ?: 0
-                val habilidades = doc.get("habilidades") as? List<String> ?: emptyList()
+                val habilidades = doc.get("habilidades") as? List<*> ?: emptyList<Any>()
                 habilidadesDesbloqueadas.clear()
-                habilidadesDesbloqueadas.addAll(habilidades)
+                habilidadesDesbloqueadas.addAll(habilidades.filterIsInstance<String>())
                 actualizarUI()
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Error al cargar datos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error al cargar datos del jugador", Toast.LENGTH_SHORT).show()
             }
     }
 
     private fun actualizarUI() {
         tvXpDisponible.text = "XP Disponible: $xpDisponible"
 
-        // Habilidades con su tipo
         val habilidades = listOf(
             Triple("PING", skillPing, "ROJO"),
             Triple("DDOS", skillDdos, "ROJO"),
@@ -91,13 +90,7 @@ class HabilidadesActivity : AppCompatActivity() {
         )
 
         for ((nombre, view, tipo) in habilidades) {
-            val dependencias = when (nombre) {
-                "DDOS" -> listOf("PING")
-                "SOBRECARGA" -> listOf("DDOS")
-                "OPTIMIZAR" -> listOf("DEBUG")
-                "ENCRIPTACION" -> listOf("FIREWALL")
-                else -> emptyList()
-            }
+            val dependencias = obtenerDependencias(nombre)
 
             when {
                 habilidadesDesbloqueadas.contains(nombre) -> {
@@ -119,36 +112,58 @@ class HabilidadesActivity : AppCompatActivity() {
         }
     }
 
+    private fun intentarDesbloquear(nombre: String) {
+        val descripcion = obtenerDescripcion(nombre)
 
-    private fun desbloquearHabilidad(nombre: String) {
-        if (habilidadesDesbloqueadas.contains(nombre)) {
-            Toast.makeText(this, "$nombre ya desbloqueada", Toast.LENGTH_SHORT).show()
+        // Mostrar siempre descripción
+        Toast.makeText(this, "$nombre: $descripcion", Toast.LENGTH_SHORT).show()
+
+        // Ya está desbloqueada
+        if (habilidadesDesbloqueadas.contains(nombre)) return
+
+        // Verifica requisitos previos
+        val dependencias = obtenerDependencias(nombre)
+        if (!dependencias.all { habilidadesDesbloqueadas.contains(it) }) {
+            Toast.makeText(this, "Debes desbloquear primero: ${dependencias.joinToString(", ")}", Toast.LENGTH_SHORT).show()
             return
         }
 
-        val costoXP = 1 // Puedes asignar diferente costo por habilidad
-        if (xpDisponible < costoXP) {
-            Toast.makeText(this, "No tienes suficiente XP", Toast.LENGTH_SHORT).show()
+        // Verifica XP suficiente
+        val costo = 1
+        if (xpDisponible < costo) {
+            Toast.makeText(this, "XP insuficiente para desbloquear $nombre", Toast.LENGTH_SHORT).show()
             return
         }
 
-        val dependencias = when (nombre) {
+        // Desbloquea
+        xpDisponible -= costo
+        habilidadesDesbloqueadas.add(nombre)
+
+        guardarCambiosFirestore()
+        actualizarUI()
+    }
+
+    private fun obtenerDependencias(nombre: String): List<String> {
+        return when (nombre) {
             "DDOS" -> listOf("PING")
             "SOBRECARGA" -> listOf("DDOS")
             "OPTIMIZAR" -> listOf("DEBUG")
             "ENCRIPTACION" -> listOf("FIREWALL")
             else -> emptyList()
         }
+    }
 
-        if (!dependencias.all { habilidadesDesbloqueadas.contains(it) }) {
-            Toast.makeText(this, "Desbloquea habilidades previas", Toast.LENGTH_SHORT).show()
-            return
+    private fun obtenerDescripcion(nombre: String): String {
+        return when (nombre) {
+            "PING" -> "Ataque básico que consume poca energía."
+            "DDOS" -> "Ataque masivo que abruma al sistema enemigo. Requiere: PING."
+            "SOBRECARGA" -> "Provoca una sobrecarga del sistema. Requiere: DDOS."
+            "DEBUG" -> "Repara errores internos del sistema para mejorar eficiencia."
+            "OPTIMIZAR" -> "Mejora el rendimiento general del sistema. Requiere: DEBUG."
+            "FIREWALL" -> "Genera una defensa contra ataques enemigos."
+            "ENCRIPTACION" -> "Mejora la seguridad mediante cifrado. Requiere: FIREWALL."
+            else -> "Habilidad sin descripción."
         }
-
-        // Desbloquear
-        xpDisponible -= costoXP
-        habilidadesDesbloqueadas.add(nombre)
-        guardarCambiosFirestore()
     }
 
     private fun guardarCambiosFirestore() {
@@ -161,11 +176,10 @@ class HabilidadesActivity : AppCompatActivity() {
         firestore.collection("usuarios").document(userId)
             .update(updates)
             .addOnSuccessListener {
-                Toast.makeText(this, "Habilidad desbloqueada", Toast.LENGTH_SHORT).show()
-                actualizarUI()
+                Toast.makeText(this, "Habilidad desbloqueada correctamente", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Error al actualizar", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error al actualizar Firestore", Toast.LENGTH_SHORT).show()
             }
     }
 }

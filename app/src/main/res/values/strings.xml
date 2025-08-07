@@ -12,7 +12,7 @@
     <string name="ping">PING</string>
     <string name="firewall">FIREWALL</string>
     <string name="log_combate">[LOG DE COMBATE]</string>
-    <string name="info_combate">Iniciando combate contra Troyano Alpha...\\nJugador usa PING: 18 de daño\\nTroyano Alpha contraataca: 12 de daño</string>
+    <string name="info_combate">Iniciando combate contra Troyano Alpha...\\Jugador usa PING: 18 de daño\\Troyano Alpha contraataca: 12 de daño</string>
     <string name="volver">← VOLVER</string>
     <string name="arbol_habilidades">[ÁRBOL DE HABILIDADES]</string>
     <string name="nivel">Nivel: 1</string>
@@ -25,7 +25,7 @@
     <string name="defensivo">Defensivo</string>
     <string name="soporte">Soporte</string>
     <string name="inventario_digital">[INVENTARIO DIGITAL]</string>
-    <string name="items_seleccionados">Items: 7\\nSeleccionados: 0</string>
+    <string name="items_seleccionados">Items: 7\\Seleccionados: 0</string>
     <string name="codigo_herramientas">Fragmentos de Código y Herramientas</string>
     <string name="fragmento_basico">Fragmento Básico</string>
     <string name="codigo_debug">Código Debug</string>
@@ -46,7 +46,8 @@
     <string name="resitrarse">REGISTRARSE</string>
     <string name="usuario">USUARIO</string>
     <string name="contraseña">CONTRASEÑA</string>
-    <string name="ingresa_usuario">Ingresa tu correo</string>
+    <string name="ingresa_usuario">Ingresa tu usuario</string>
+    <string name="ingresa_correo">Ingresa tu correo</string>
     <string name="clave">Contraseña</string>
     <string name="acceder"><![CDATA[> ACCEDER <]]></string>
     <string name="menu">≡ MENÚ</string>

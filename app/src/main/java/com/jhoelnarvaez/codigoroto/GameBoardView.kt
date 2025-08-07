@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import kotlin.random.Random
 
 class GameBoardView @JvmOverloads constructor(
     context: Context,
@@ -67,20 +68,6 @@ class GameBoardView @JvmOverloads constructor(
     private var playerX = 1
     private var playerY = 1
 
-    private val enemies = mutableListOf<Pair<Int, Int>>().apply {
-        add(Pair(7, 3))
-        add(Pair(9, 8))
-        add(Pair(3, 6))
-        add(Pair(12, 2))
-    }
-
-    private val items = mutableListOf<Pair<Int, Int>>().apply {
-        add(Pair(2, 4))
-        add(Pair(11, 7))
-        add(Pair(6, 9))
-        add(Pair(14, 5))
-    }
-
     private val walls = mutableListOf<Rect>().apply {
         add(Rect(5, 2, 7, 3))
         add(Rect(10, 4, 11, 8))
@@ -88,7 +75,52 @@ class GameBoardView @JvmOverloads constructor(
         add(Rect(2, 8, 6, 9))
     }
 
-    private val goldItem = Pair(8, 9)
+    private val enemies = mutableListOf<Pair<Int, Int>>()
+    private val items = mutableListOf<Pair<Int, Int>>()
+    private var goldItem: Pair<Int, Int> = Pair(-1, -1)
+
+    init {
+        generateGameObjects()
+    }
+
+    private fun generateGameObjects() {
+        val occupied = mutableSetOf<Pair<Int, Int>>()
+        // Ocupa paredes
+        for (wall in walls) {
+            for (x in wall.left until wall.right) {
+                for (y in wall.top until wall.bottom) {
+                    occupied.add(Pair(x, y))
+                }
+            }
+        }
+
+        // Ocupa al jugador
+        occupied.add(Pair(playerX, playerY))
+
+        fun getFreeRandomPosition(): Pair<Int, Int> {
+            var pos: Pair<Int, Int>
+            do {
+                val x = Random.nextInt(0, GRID_WIDTH)
+                val y = Random.nextInt(0, GRID_HEIGHT)
+                pos = Pair(x, y)
+            } while (occupied.contains(pos))
+            occupied.add(pos)
+            return pos
+        }
+
+        // Generar enemigos
+        repeat(4) {
+            enemies.add(getFreeRandomPosition())
+        }
+
+        // Generar ítems
+        repeat(4) {
+            items.add(getFreeRandomPosition())
+        }
+
+        // Generar objeto dorado
+        goldItem = getFreeRandomPosition()
+    }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
@@ -183,25 +215,18 @@ class GameBoardView @JvmOverloads constructor(
         canvas.drawText("♦", cx, cy + (textPaint.textSize / 3), textPaint)
     }
 
-    // NUEVA VERSIÓN
     fun movePlayer(deltaX: Int, deltaY: Int): Boolean {
         val newX = playerX + deltaX
         val newY = playerY + deltaY
 
-        if (newX < 0 || newX >= GRID_WIDTH || newY < 0 || newY >= GRID_HEIGHT) {
-            return false
-        }
-
-        if (isWallAt(newX, newY)) {
-            return false
-        }
+        if (newX < 0 || newX >= GRID_WIDTH || newY < 0 || newY >= GRID_HEIGHT) return false
+        if (isWallAt(newX, newY)) return false
 
         playerX = newX
         playerY = newY
         invalidate()
         return true
     }
-
 
     private fun isWallAt(x: Int, y: Int): Boolean {
         for (wall in walls) {
@@ -228,7 +253,7 @@ class GameBoardView @JvmOverloads constructor(
     }
 
     fun removeGoldItem() {
-        // Aquí podrías cambiar su posición a -1, -1 si quieres "eliminarlo"
+        goldItem = Pair(-1, -1)
         invalidate()
     }
 }

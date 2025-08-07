@@ -2,6 +2,7 @@ package com.jhoelnarvaez.codigoroto
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -41,8 +42,24 @@ class RegisterActivity : AppCompatActivity() {
             val email = etEmail.text.toString().trim()
             val contrasena = etContrasena.text.toString().trim()
 
+            // Validaciones
             if (usuario.isEmpty() || email.isEmpty() || contrasena.isEmpty()) {
                 Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (usuario.length > 8) {
+                Toast.makeText(this, "El nombre de usuario no debe exceder los 8 caracteres", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Correo electrónico no válido", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (contrasena.length < 8) {
+                Toast.makeText(this, "La contraseña debe tener al menos 8 caracteres", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 

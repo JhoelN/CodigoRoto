@@ -4,12 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.random.Random
+import kotlin.math.max
 
 class CombateActivity : AppCompatActivity() {
 
@@ -36,8 +36,11 @@ class CombateActivity : AppCompatActivity() {
     private var turnoJugador = true
     private var tiempoRestante = 10
     private val handler = Handler(Looper.getMainLooper())
+
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
+
+    private var contadorActivo = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +73,7 @@ class CombateActivity : AppCompatActivity() {
         btnPing.setOnClickListener { usarComando("PING") }
         btnFirewall.setOnClickListener { usarComando("FIREWALL") }
         btnHuir.setOnClickListener {
-            appendLog("¡Huiste del combate!")
+            appendLog("🏃 ¡Huiste del combate!")
             finish()
         }
 
@@ -78,76 +81,124 @@ class CombateActivity : AppCompatActivity() {
     }
 
     private fun actualizarUI() {
-        playerHpText.text = "$playerHP/100"
-        playerEnText.text = "$playerEN/50"
+        playerHpText.text = "${playerHP}/100"
+        playerEnText.text = "${playerEN}/50"
         playerHpBar.progress = playerHP
         playerEnBar.progress = playerEN
 
-        enemyHpText.text = "$enemyHP/80"
+        enemyHpText.text = "${enemyHP}/80"
         enemyHpBar.progress = enemyHP
+
+        tvTurno.text = if (turnoJugador) "🧑‍💻 Tu turno" else "👾 Turno del enemigo"
+
+        bloquearBotones(turnoJugador)
     }
 
     private fun appendLog(mensaje: String) {
         tvCombatLog.append("\n$mensaje")
     }
 
+    private fun bloquearBotones(activo: Boolean) {
+        btnPing.isEnabled = activo
+        btnFirewall.isEnabled = activo
+    }
+
     private fun usarComando(tipo: String) {
-        if (!turnoJugador) return
+        if (!turnoJugador || playerHP <= 0 || enemyHP <= 0) return
+
+        var damage = 0
+        var costo = 0
+        var nombreAtaque = ""
 
         when (tipo) {
             "PING" -> {
-                if (playerEN >= 10) {
-                    val damage = Random.nextInt(15, 26)
-                    playerEN -= 10
-                    enemyHP -= damage
-                    appendLog("Usaste PING: hiciste $damage de daño.")
-                } else {
+                costo = 10
+                if (playerEN < costo) {
                     appendLog("No tienes suficiente energía para usar PING.")
                     return
                 }
+                damage = Random.nextInt(15, 26)
+                nombreAtaque = "PING"
             }
             "FIREWALL" -> {
-                if (playerEN >= 20) {
-                    val damage = Random.nextInt(25, 41)
-                    playerEN -= 20
-                    enemyHP -= damage
-                    appendLog("Usaste FIREWALL: hiciste $damage de daño.")
-                } else {
+                costo = 20
+                if (playerEN < costo) {
                     appendLog("No tienes suficiente energía para usar FIREWALL.")
                     return
                 }
+                damage = Random.nextInt(25, 41)
+                nombreAtaque = "FIREWALL"
             }
         }
 
+        playerEN -= costo
+        enemyHP = max(0, enemyHP - damage)
+
+        appendLog("💥 Usaste $nombreAtaque e hiciste $damage de daño.")
+        turnoJugador = false
+        actualizarUI()
+
         if (enemyHP <= 0) {
-            appendLog("¡Enemigo derrotado!")
+            appendLog("🏆 ¡Enemigo derrotado!")
             guardarResultadoCombate(true)
             return
         }
 
-        actualizarUI()
-        turnoJugador = false
-        iniciarTurno()
-    }
-
-    private fun iniciarTurno() {
-        actualizarUI()
-        tiempoRestante = 10
-        tvTurno.text = if (turnoJugador) "Tu turno" else "Turno enemigo"
-        handler.postDelayed({ if (!turnoJugador) turnoEnemigo() }, 1000)
+        handler.postDelayed({
+            turnoEnemigo()
+        }, 1000)
     }
 
     private fun turnoEnemigo() {
+        if (enemyHP <= 0 || playerHP <= 0) return
+
+        tvTurno.text = "👾 Turno del enemigo..."
+
         val damage = Random.nextInt(10, 20)
-        playerHP -= damage
-        appendLog("El enemigo te atacó con $damage de daño.")
-        if (playerHP <= 0) {
-            appendLog("¡Has sido derrotado!")
-            guardarResultadoCombate(false)
+
+        handler.postDelayed({
+            playerHP = max(0, playerHP - damage)
+            appendLog("⚔️ El enemigo te atacó causando $damage de daño.")
+            actualizarUI()
+
+            if (playerHP <= 0) {
+                appendLog("!Has sido derrotado!")
+                guardarResultadoCombate(false)
+            } else {
+                turnoJugador = true
+                handler.postDelayed({
+                    iniciarTurno()
+                }, 1000)
+            }
+        }, 1000)
+    }
+
+    private fun iniciarTurno() {
+        if (playerHP <= 0 || enemyHP <= 0) return
+
+        actualizarUI()
+        tiempoRestante = 10
+        contadorActivo = true
+        iniciarContador()
+    }
+
+    private fun iniciarContador() {
+        if (!contadorActivo) return
+
+        tvTiempo.text = "⏱️ Tiempo: $tiempoRestante s"
+
+        if (tiempoRestante <= 0) {
+            contadorActivo = false
+            if (!turnoJugador) {
+                turnoEnemigo()
+            }
             return
         }
-        turnoJugador = true
-        actualizarUI()
+
+        handler.postDelayed({
+            tiempoRestante--
+            iniciarContador()
+        }, 1000)
     }
 
     private fun guardarResultadoCombate(victoria: Boolean) {
@@ -159,6 +210,7 @@ class CombateActivity : AppCompatActivity() {
             "hp_restante" to playerHP,
             "energia_restante" to playerEN
         )
+
         firestore.collection("usuarios").document(userId)
             .collection("combates")
             .add(resultado)
