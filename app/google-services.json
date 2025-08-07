@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "215305744988",
+    "project_id": "codigoroto-91edb",
+    "storage_bucket": "codigoroto-91edb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215305744988:android:de3d43d7e1d49d81ceec99",
+        "android_client_info": {
+          "package_name": "com.jhoelnarvaez.codigoroto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215305744988-708i1un9d29khscccf7t1notq75r1pbg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFiL7TtjpWJIxd5kJ05JUBc0c-o5_Cm1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215305744988-708i1un9d29khscccf7t1notq75r1pbg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

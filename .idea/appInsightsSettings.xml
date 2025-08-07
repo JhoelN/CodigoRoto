@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.jhoelnarvaez.codigoroto" />
+                  <option name="mobileSdkAppId" value="1:215305744988:android:de3d43d7e1d49d81ceec99" />
+                  <option name="projectId" value="codigoroto-91edb" />
+                  <option name="projectNumber" value="215305744988" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

@@ -121,6 +121,7 @@
                 android:textColor="#1DB3CB"
                 android:textSize="12sp" />
 
+            <!-- Contraseña -->
             <EditText
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
@@ -134,7 +135,6 @@
                 android:textColor="#FFFFFF"
                 android:textColorHint="#66FFFFFF" />
 
-            <!-- Contraseña -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
