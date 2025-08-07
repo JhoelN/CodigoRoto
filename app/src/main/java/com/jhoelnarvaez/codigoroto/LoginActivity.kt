@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
                         // Redirigir a otra pantalla, por ejemplo MainActivity
-                        startActivity(Intent(this, MainActivity::class.java))
+                        startActivity(Intent(this, MenuActivity::class.java))
                         finish()
                     } else {
                         Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_LONG)

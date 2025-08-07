@@ -46,7 +46,7 @@
     <string name="resitrarse">REGISTRARSE</string>
     <string name="usuario">USUARIO</string>
     <string name="contraseña">CONTRASEÑA</string>
-    <string name="ingresa_usuario">Ingresa tu usuario</string>
+    <string name="ingresa_usuario">Ingresa tu correo</string>
     <string name="clave">Contraseña</string>
     <string name="acceder"><![CDATA[> ACCEDER <]]></string>
     <string name="menu">≡ MENÚ</string>

@@ -1,30 +1,32 @@
-package com.tuapp.nombre
+package com.jhoelnarvaez.codigoroto
 
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.card.MaterialCardView
 import com.jhoelnarvaez.codigoroto.R
 
 class InventarioActivity : AppCompatActivity() {
 
-    // UI Components
-    private lateinit var btnVolver: TextView
-    private lateinit var btnCompilar: TextView
-    private lateinit var btnLimpiar: TextView
-    private lateinit var btnVolverJuego: TextView
-    private val inventoryItems = arrayOfNulls<LinearLayout>(7)
+    private lateinit var btnVolver: Button
+    private lateinit var btnCompilar: Button
+    private lateinit var btnLimpiar: Button
+    private lateinit var btnVolverJuego: Button
 
-    // Data
     private val selectedItems = mutableListOf<Int>()
+
+    private lateinit var inventoryItems: List<MaterialCardView>
+
     private val itemNames = arrayOf(
         "Fragmento Básico", "Código Debug", "Kit de Exploits",
         "Parche de Firewall", "Celda de Energía", "Nano Reparador", "Núcleo Cuántico"
     )
 
     private val itemCounts = intArrayOf(3, 1, 1, 2, 5, 3, 1)
+
     private val itemDescriptions = arrayOf(
         "Fragmento de código básico usado para construir habilidades simples",
         "Herramienta de debugging avanzada para detectar errores del sistema",
@@ -39,150 +41,102 @@ class InventarioActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inventario)
 
-        initViews()
+        // Inicializar botones con IDs reales del XML
+        btnVolver = findViewById(R.id.btnVolver)
+        btnCompilar = findViewById(R.id.btnCompilar)
+        btnLimpiar = findViewById(R.id.btnLimpiarSeleccion)
+        btnVolverJuego = findViewById(R.id.btnVolverAlJuego)
+
+        // Obtener referencias a los CardView manualmente por orden de aparición en el layout
+        inventoryItems = listOf(
+            getCardViewAt(0), getCardViewAt(1), getCardViewAt(2),
+            getCardViewAt(3), getCardViewAt(4), getCardViewAt(5), getCardViewAt(6)
+        )
+
         setupClickListeners()
         updateUI()
     }
 
-    private fun initViews() {
-        btnVolver = findViewById(R.id.btn_volver)
-        btnCompilar = findViewById(R.id.btn_compilar)
-        btnLimpiar = findViewById(R.id.btn_limpiar)
-        btnVolverJuego = findViewById(R.id.btn_volver_juego)
-
-        // Inicializar items del inventario
-        inventoryItems[0] = findViewById(R.id.item_fragmento_basico)
-        inventoryItems[1] = findViewById(R.id.item_codigo_debug)
-        inventoryItems[2] = findViewById(R.id.item_kit_exploits)
-        inventoryItems[3] = findViewById(R.id.item_parche_firewall)
-        inventoryItems[4] = findViewById(R.id.item_celda_energia)
-        inventoryItems[5] = findViewById(R.id.item_nano_reparador)
-        inventoryItems[6] = findViewById(R.id.item_nucleo_cuantico)
+    // Helper para obtener CardViews sin IDs
+    private fun getCardViewAt(index: Int): MaterialCardView {
+        val grid = findViewById<android.widget.GridLayout>(R.id.inventory_grid)
+        return grid.getChildAt(index) as MaterialCardView
     }
 
     private fun setupClickListeners() {
-        // Botón volver
         btnVolver.setOnClickListener { finish() }
-
-        // Botón compilar
-        btnCompilar.setOnClickListener { compilarFragmentos() }
-
-        // Botón limpiar selección
+        btnVolverJuego.setOnClickListener { finish() }
         btnLimpiar.setOnClickListener { limpiarSeleccion() }
 
-        // Botón volver al juego
-        btnVolverJuego.setOnClickListener { finish() }
+        btnCompilar.setOnClickListener { compilarFragmentos() }
 
-        // Click listeners para items del inventario
-        inventoryItems.forEachIndexed { index, item ->
-            item?.setOnClickListener { mostrarDetallesItem(index) }
-
-            // Doble click para seleccionar
-            item?.setOnLongClickListener {
+        inventoryItems.forEachIndexed { index, card ->
+            card.setOnClickListener {
+                mostrarDetallesItem(index)
+            }
+            card.setOnLongClickListener {
                 toggleItemSelection(index)
                 true
             }
         }
     }
 
-    private fun mostrarDetallesItem(itemIndex: Int) {
-        val details = "${itemNames[itemIndex]}\n\n" +
-                "${itemDescriptions[itemIndex]}\n\n" +
-                "Cantidad disponible: ${itemCounts[itemIndex]}"
-
-        Toast.makeText(this, details, Toast.LENGTH_LONG).show()
+    private fun mostrarDetallesItem(index: Int) {
+        val mensaje = "${itemNames[index]}\n\n${itemDescriptions[index]}\n\nCantidad: ${itemCounts[index]}"
+        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
     }
 
-    private fun toggleItemSelection(itemIndex: Int) {
-        if (itemCounts[itemIndex] <= 0) {
+    private fun toggleItemSelection(index: Int) {
+        if (itemCounts[index] <= 0) {
             Toast.makeText(this, "No tienes este item disponible", Toast.LENGTH_SHORT).show()
             return
         }
 
-        if (selectedItems.contains(itemIndex)) {
-            // Deseleccionar
-            selectedItems.remove(itemIndex)
-            inventoryItems[itemIndex]?.alpha = 1.0f
+        if (selectedItems.contains(index)) {
+            selectedItems.remove(index)
+            inventoryItems[index].alpha = 1.0f
         } else {
-            // Seleccionar
-            selectedItems.add(itemIndex)
-            inventoryItems[itemIndex]?.alpha = 0.7f
+            selectedItems.add(index)
+            inventoryItems[index].alpha = 0.6f
         }
 
         updateUI()
-        val action = if (selectedItems.contains(itemIndex)) "seleccionado" else "deseleccionado"
-        Toast.makeText(this, "${itemNames[itemIndex]} $action", Toast.LENGTH_SHORT).show()
+        val estado = if (selectedItems.contains(index)) "seleccionado" else "deseleccionado"
+        Toast.makeText(this, "${itemNames[index]} $estado", Toast.LENGTH_SHORT).show()
     }
 
     private fun limpiarSeleccion() {
         selectedItems.clear()
-
-        // Restaurar alpha de todos los items
-        inventoryItems.forEach { item ->
-            item?.alpha = 1.0f
-        }
-
+        inventoryItems.forEach { it.alpha = 1.0f }
         updateUI()
         Toast.makeText(this, "Selección limpiada", Toast.LENGTH_SHORT).show()
     }
 
     private fun compilarFragmentos() {
         if (selectedItems.size < 2) {
-            Toast.makeText(this, "Necesitas seleccionar al menos 2 fragmentos", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Selecciona al menos 2 ítems", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Simular compilación
-        val compilacion = buildString {
+        val resultado = buildString {
             append("Compilando:\n")
-            selectedItems.forEach { itemIndex ->
-                append("- ${itemNames[itemIndex]}\n")
-            }
-            append("\n¡Nueva habilidad creada!")
+            selectedItems.forEach { append("- ${itemNames[it]}\n") }
+            append("\n¡Habilidad creada!")
         }
 
-        // Consumir items seleccionados
-        selectedItems.forEach { itemIndex ->
-            if (itemCounts[itemIndex] > 0) {
-                itemCounts[itemIndex]--
-            }
+        selectedItems.forEach {
+            if (itemCounts[it] > 0) itemCounts[it]--
         }
 
         limpiarSeleccion()
-        updateItemCounts()
+        updateUI()
 
-        Toast.makeText(this, compilacion, Toast.LENGTH_LONG).show()
+        Toast.makeText(this, resultado, Toast.LENGTH_LONG).show()
     }
 
     private fun updateUI() {
-        // Actualizar contador de seleccionados en el header
-        // Esto requeriría modificar el header para incluir el TextView correspondiente
-
-        // Habilitar/deshabilitar botón compilar
-        val isEnabled = selectedItems.size >= 2
-        btnCompilar.alpha = if (isEnabled) 1.0f else 0.5f
-        btnCompilar.isEnabled = isEnabled
-    }
-
-    private fun updateItemCounts() {
-        // Actualizar las cantidades mostradas en cada item
-        // Esto requeriría obtener referencias a los TextViews de cantidad de cada item
-        // y actualizarlos con los nuevos valores de itemCounts[]
-
-        inventoryItems.forEachIndexed { index, item ->
-            // Aquí actualizarías el TextView de cantidad dentro de cada LinearLayout
-            // Por simplicidad, solo mostramos un Toast con las cantidades actualizadas
-        }
-    }
-
-    // Método helper para obtener el estado del inventario
-    fun getSelectedItems(): List<Int> = selectedItems.toList()
-
-    // Método helper para establecer cantidades de items (útil para testing)
-    fun setItemCount(itemIndex: Int, count: Int) {
-        if (itemIndex in itemCounts.indices) {
-            itemCounts[itemIndex] = count
-            updateItemCounts()
-        }
+        val habilitado = selectedItems.size >= 2
+        btnCompilar.isEnabled = habilitado
+        btnCompilar.alpha = if (habilitado) 1.0f else 0.4f
     }
 }

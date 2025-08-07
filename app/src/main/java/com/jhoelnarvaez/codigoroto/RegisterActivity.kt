@@ -27,59 +27,70 @@ class RegisterActivity : AppCompatActivity() {
         val etEmail = findViewById<EditText>(R.id.et_email)
         val etContrasena = findViewById<EditText>(R.id.et_contrasena)
         val btnCrearCuenta = findViewById<Button>(R.id.btn_crear_cuenta)
-
         val btnLogin = findViewById<Button>(R.id.btn_login)
+
+        // Botón para ir a login
         btnLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
 
+        // Crear cuenta
         btnCrearCuenta.setOnClickListener {
             val usuario = etUsuario.text.toString().trim()
             val email = etEmail.text.toString().trim()
             val contrasena = etContrasena.text.toString().trim()
 
             if (usuario.isEmpty() || email.isEmpty() || contrasena.isEmpty()) {
-                Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Crear usuario en Firebase Auth
             auth.createUserWithEmailAndPassword(email, contrasena)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val userId = auth.currentUser?.uid
 
-                        // Guardar datos en Firestore
-                        val datosUsuario = hashMapOf(
+                        if (userId == null) {
+                            Toast.makeText(this, "Error al obtener el ID del usuario", Toast.LENGTH_LONG).show()
+                            return@addOnCompleteListener
+                        }
+
+                        // Datos iniciales del jugador
+                        val datosJugador = hashMapOf(
                             "usuario" to usuario,
-                            "email" to email
+                            "email" to email,
+                            "nivel" to 1,
+                            "experiencia" to 0,
+                            "inventario" to mapOf(
+                                "fragmento_basico" to 3,
+                                "codigo_debug" to 1,
+                                "kit_exploits" to 1,
+                                "parche_firewall" to 2,
+                                "celda_energia" to 5,
+                                "nano_reparador" to 3,
+                                "nucleo_cuantico" to 1
+                            ),
+                            "habilidades" to emptyList<String>(),
+                            "progreso" to mapOf(
+                                "mision_actual" to "intro",
+                                "mapa" to "sector_1"
+                            )
                         )
 
-                        firestore.collection("usuarios").document(userId!!)
-                            .set(datosUsuario)
+                        firestore.collection("jugadores").document(userId)
+                            .set(datosJugador)
                             .addOnSuccessListener {
-                                Toast.makeText(
-                                    this,
-                                    "Usuario registrado correctamente",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                // Puedes redirigir a otra pantalla aquí
+                                Toast.makeText(this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this, MenuActivity::class.java))
+                                finish()
                             }
                             .addOnFailureListener { e ->
-                                Toast.makeText(
-                                    this,
-                                    "Error al guardar los datos: ${e.message}",
-                                    Toast.LENGTH_LONG
-                                ).show()
+                                Toast.makeText(this, "Error al guardar datos: ${e.message}", Toast.LENGTH_LONG).show()
                             }
+
                     } else {
-                        Toast.makeText(
-                            this,
-                            "Error al registrar: ${task.exception?.message}",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(this, "Error al registrar: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                     }
                 }
         }

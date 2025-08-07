@@ -70,6 +70,7 @@
 
         <!-- Inventory Grid -->
         <GridLayout
+            android:id="@+id/inventory_grid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="3"

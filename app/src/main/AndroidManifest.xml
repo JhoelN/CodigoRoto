@@ -32,7 +32,7 @@
         <!-- Actividad principal del juego/menu -->
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
 
         <!-- Otras actividades del juego -->
         <activity
