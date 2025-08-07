@@ -19,31 +19,31 @@
             android:id="@+id/btn_huir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="← HUIR"
-            android:textColor="#FF4444"
-            android:textSize="14sp"
             android:background="#2a0a0a"
-            android:padding="8dp"
             android:clickable="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:padding="8dp"
+            android:text="@string/huir"
+            android:textColor="#FF4444"
+            android:textSize="14sp" />
 
         <!-- Título -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="[COMBATE ACTIVO]"
+            android:gravity="center"
+            android:text="@string/combate_activo"
             android:textColor="#FF4444"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center" />
+            android:textStyle="bold" />
 
         <!-- Info de turno -->
         <TextView
             android:id="@+id/tv_turno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Turno: TU"
+            android:text="@string/turno"
             android:textColor="#00FFFF"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -56,10 +56,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Turno: JUGADOR | Tiempo: 4s"
+        android:padding="4dp"
+        android:text="@string/turno_tiempo"
         android:textColor="#888888"
-        android:textSize="12sp"
-        android:padding="4dp" />
+        android:textSize="12sp" />
 
     <!-- Arena de combate -->
     <LinearLayout
@@ -97,11 +97,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="JUGADOR"
+                android:layout_marginBottom="16dp"
+                android:text="@string/jugador"
                 android:textColor="#00FFFF"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp" />
+                android:textStyle="bold" />
 
             <!-- Stats jugador -->
             <LinearLayout
@@ -120,10 +120,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="HP:"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/hp"
                         android:textColor="#00FFFF"
-                        android:textSize="12sp"
-                        android:layout_marginEnd="8dp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_player_hp"
@@ -159,10 +159,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="EN:"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/en"
                         android:textColor="#4488FF"
-                        android:textSize="12sp"
-                        android:layout_marginEnd="8dp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_player_en"
@@ -229,11 +229,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Troyano Alpha"
+                android:layout_marginBottom="16dp"
+                android:text="@string/troyano_alpha"
                 android:textColor="#FF4444"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp" />
+                android:textStyle="bold" />
 
             <!-- HP enemigo -->
             <LinearLayout
@@ -246,10 +246,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="HP:"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/hp"
                     android:textColor="#FF4444"
-                    android:textSize="12sp"
-                    android:layout_marginEnd="8dp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_enemy_hp"
@@ -294,11 +294,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="[COMANDOS DISPONIBLES]"
+            android:layout_marginBottom="16dp"
+            android:text="@string/comandos_dosponibles"
             android:textColor="#00FFFF"
             android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
+            android:textStyle="bold" />
 
         <!-- Grid de comandos -->
         <LinearLayout
@@ -332,11 +332,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="PING"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/ping"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="4dp" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -374,11 +374,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="FIREWALL"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/firewall"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="4dp" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -410,11 +410,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="[LOG DE COMBATE]"
+            android:layout_marginBottom="8dp"
+            android:text="@string/log_combate"
             android:textColor="#44FF44"
             android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+            android:textStyle="bold" />
 
         <!-- Contenido del log -->
         <ScrollView
@@ -426,11 +426,11 @@
                 android:id="@+id/tv_combat_log"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Iniciando combate contra Troyano Alpha...\nJugador usa PING: 18 de daño\nTroyano Alpha contraataca: 12 de daño"
-                android:textColor="#44FF44"
-                android:textSize="11sp"
+                android:fontFamily="monospace"
                 android:lineSpacingMultiplier="1.2"
-                android:fontFamily="monospace" />
+                android:text="@string/info_combate"
+                android:textColor="#44FF44"
+                android:textSize="11sp" />
 
         </ScrollView>
 

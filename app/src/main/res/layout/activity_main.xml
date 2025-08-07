@@ -24,35 +24,35 @@
 
             <Button
                 android:id="@+id/btnMenu"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_marginEnd="8dp"
                 android:backgroundTint="@android:color/transparent"
-                android:text="≡ MENÚ"
+                android:text="@string/menu"
                 android:textColor="#00FFFF"
-                android:textSize="12sp"
-                style="@style/Widget.Material3.Button.OutlinedButton" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btnSkills"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_marginEnd="8dp"
                 android:backgroundTint="@android:color/transparent"
-                android:text="⚡ SKILLS"
+                android:text="@string/skillss"
                 android:textColor="#00FFFF"
-                android:textSize="12sp"
-                style="@style/Widget.Material3.Button.OutlinedButton" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btnItems"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:backgroundTint="@android:color/transparent"
-                android:text="⊕ ITEMS"
+                android:text="@string/items"
                 android:textColor="#00FFFF"
-                android:textSize="12sp"
-                style="@style/Widget.Material3.Button.OutlinedButton" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -67,7 +67,7 @@
                 android:id="@+id/tvPlayerHp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="HP: 100/100"
+                android:text="@string/hp"
                 android:textColor="#00FFFF"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -76,7 +76,7 @@
                 android:id="@+id/tvPlayerEn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EN: 50/50"
+                android:text="@string/en"
                 android:textColor="#00FFFF"
                 android:textSize="12sp" />
 
@@ -84,7 +84,7 @@
                 android:id="@+id/tvPlayerXp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="XP: 0"
+                android:text="@string/xp"
                 android:textColor="#00FFFF"
                 android:textSize="12sp" />
 
@@ -98,12 +98,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#000033"
+        android:fontFamily="monospace"
         android:gravity="center"
         android:padding="8dp"
-        android:text="[ESCANEANDO SISTEMA... OK] - POS: (1,1) - VEL: 0"
+        android:text="@string/detalles_sistema"
         android:textColor="#00FFFF"
-        android:textSize="12sp"
-        android:fontFamily="monospace" />
+        android:textSize="12sp" />
 
     <!-- Contenedor del tablero -->
     <FrameLayout
@@ -135,11 +135,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="[CONTROLES DE MOVIMIENTO]"
+            android:layout_marginBottom="15dp"
+            android:text="@string/controles"
             android:textColor="#00FFFF"
             android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="15dp" />
+            android:textStyle="bold" />
 
         <!-- Flecha arriba -->
         <Button

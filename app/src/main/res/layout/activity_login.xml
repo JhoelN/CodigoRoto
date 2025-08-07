@@ -13,38 +13,38 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ACCESO AL SISTEMA"
+        android:layout_marginTop="32dp"
+        android:text="@string/acceso_sistema"
+        android:textColor="#C412B2"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="#C412B2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="> CODIGO ROTO SECURITY PROTOCOL<"
+        android:layout_marginTop="8dp"
+        android:text="@string/codigo_roto"
         android:textColor="#06B6D4"
         android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <TextView
         android:id="@+id/auth_required"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="[AUTENTICACION REQUERIDA]"
+        android:layout_marginTop="4dp"
+        android:text="@string/autenticacion"
         android:textColor="#4ADE80"
         android:textSize="10sp"
-        app:layout_constraintTop_toBottomOf="@id/subtitle"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="4dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtitle" />
 
     <!-- Contenedor -->
     <androidx.cardview.widget.CardView
@@ -75,73 +75,73 @@
                 <Button
                     android:id="@+id/btn_login"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="INICIAR SESION"
+                    android:layout_weight="1"
                     android:backgroundTint="#1DB3CB"
-                    android:textColor="#FFFFFF"/>
+                    android:text="@string/iniciar_sesion"
+                    android:textColor="#FFFFFF" />
 
                 <Button
                     android:id="@+id/btn_register"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="REGISTRARSE"
+                    android:layout_weight="1"
                     android:backgroundTint="#00000000"
-                    android:textColor="#1DB3CB"/>
+                    android:text="@string/resitrarse"
+                    android:textColor="#1DB3CB" />
             </LinearLayout>
 
             <!-- Usuario -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="USUARIO"
+                android:text="@string/usuario"
                 android:textColor="#1DB3CB"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/et_usuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ingresa tu usuario"
-                android:inputType="text"
+                android:layout_marginBottom="12dp"
                 android:backgroundTint="#1DB3CB"
                 android:drawableStart="@android:drawable/ic_menu_myplaces"
+                android:hint="@string/ingresa_usuario"
+                android:inputType="text"
                 android:padding="10dp"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#66FFFFFF"
-                android:layout_marginBottom="12dp"/>
+                android:textColorHint="#66FFFFFF" />
 
             <!-- Contraseña -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CONTRASEÑA"
+                android:text="@string/contraseña"
                 android:textColor="#1DB3CB"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/et_contrasena"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contraseña"
-                android:inputType="textPassword"
+                android:layout_marginBottom="16dp"
                 android:backgroundTint="#1DB3CB"
                 android:drawableStart="@android:drawable/ic_lock_idle_lock"
                 android:drawableEnd="@android:drawable/ic_menu_view"
+                android:hint="@string/clave"
+                android:inputType="textPassword"
                 android:padding="10dp"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#66FFFFFF"
-                android:layout_marginBottom="16dp"/>
+                android:textColorHint="#66FFFFFF" />
 
             <!-- Botón Acceder -->
             <Button
                 android:id="@+id/btn_acceder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="> ACCEDER <"
                 android:backgroundTint="#2196F3"
-                android:textColor="#FFFFFF"/>
+                android:text="@string/acceder"
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

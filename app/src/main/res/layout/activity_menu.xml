@@ -14,94 +14,93 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CÓDIGO ROTO"
+        android:layout_marginTop="40dp"
+        android:text="@string/title_codigo_roto"
+        android:textColor="#C412B2"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="#C412B2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="> SISTEMA INICIADO <"
+        android:text="@string/sistema_iniciado"
         android:textColor="#4ADE80"
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <TextView
         android:id="@+id/connection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="[CONECCIÓN ESTABLECIDA]"
+        android:text="@string/conecion_establecida"
         android:textColor="#1DB3CB"
         android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/status"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/status" />
 
     <!-- Botones de opciones -->
     <Button
         android:id="@+id/btn_nueva_partida"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="> NUEVA PARTIDA <"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#00BCD4"
+        android:text="@string/nueva_partida"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/connection"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="48dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/connection" />
 
     <Button
         android:id="@+id/btn_continuar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="> CONTINUAR <"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#C084FC"
+        android:text="@string/continuar"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_nueva_partida"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="48dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_nueva_partida" />
 
     <Button
         android:id="@+id/btn_habilidades"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="> HABILIDADES <"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#22C55E"
+        android:text="@string/habilidades"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_continuar"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="48dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_continuar" />
 
     <Button
         android:id="@+id/btn_inventario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="> INVENTARIOS <"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#F44336"
+        android:text="@string/inventarios"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_habilidades"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="48dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_habilidades" />
 
     <!-- Bienvenida y salir -->
     <LinearLayout
@@ -117,19 +116,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BIENVENIDO, *USUARIO*"
+            android:text="@string/bienvenido"
             android:textColor="#1DB3CB"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/btn_salir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SALIR"
             android:layout_marginStart="8dp"
-            android:textColor="#FF1744"
             android:background="@android:color/transparent"
-            android:drawableStart="@android:drawable/ic_lock_power_off"/>
+            android:drawableStart="@android:drawable/ic_lock_power_off"
+            android:text="@string/salir"
+            android:textColor="#FF1744" />
     </LinearLayout>
 
     <!-- Ayuda -->
@@ -137,11 +136,11 @@
         android:id="@+id/help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="[USA AWSD O FLECHAS PARA MOVERTE]"
+        android:layout_marginTop="12dp"
+        android:text="@string/info_flechas"
         android:textColor="#1DB3CB"
         android:textSize="10sp"
-        app:layout_constraintTop_toBottomOf="@id/user_exit_row"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_exit_row" />
 </androidx.constraintlayout.widget.ConstraintLayout>

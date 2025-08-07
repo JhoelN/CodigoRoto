@@ -23,11 +23,11 @@
                 android:id="@+id/btnVolver"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:text="← VOLVER"
-                android:textColor="#00ffff"
-                android:textSize="12sp"
                 android:background="@drawable/button_outline_cyan"
-                android:paddingHorizontal="16dp" />
+                android:paddingHorizontal="16dp"
+                android:text="@string/volver"
+                android:textColor="#00ffff"
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -39,19 +39,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="[INVENTARIO DIGITAL]"
+                    android:fontFamily="monospace"
+                    android:text="@string/inventario_digital"
                     android:textColor="#00ffff"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:fontFamily="monospace" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fragmentos de Código y Herramientas"
+                    android:fontFamily="monospace"
+                    android:text="@string/codigo_herramientas"
                     android:textColor="#888888"
-                    android:textSize="12sp"
-                    android:fontFamily="monospace" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -101,12 +101,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Fragmento Básico"
-                        android:textColor="#ffffff"
-                        android:textSize="10sp"
+                        android:layout_marginTop="8dp"
                         android:fontFamily="monospace"
                         android:gravity="center"
-                        android:layout_marginTop="8dp" />
+                        android:text="@string/fragmento_basico"
+                        android:textColor="#ffffff"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -147,12 +147,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Código Debug"
-                        android:textColor="#ffffff"
-                        android:textSize="10sp"
+                        android:layout_marginTop="8dp"
                         android:fontFamily="monospace"
                         android:gravity="center"
-                        android:layout_marginTop="8dp" />
+                        android:text="@string/codigo_debug"
+                        android:textColor="#ffffff"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -193,12 +193,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kit de Exploits"
-                        android:textColor="#ffffff"
-                        android:textSize="10sp"
+                        android:layout_marginTop="8dp"
                         android:fontFamily="monospace"
                         android:gravity="center"
-                        android:layout_marginTop="8dp" />
+                        android:text="@string/kit_explosits"
+                        android:textColor="#ffffff"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -239,12 +239,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Parche de Firewall"
-                        android:textColor="#ffffff"
-                        android:textSize="10sp"
+                        android:layout_marginTop="8dp"
                         android:fontFamily="monospace"
                         android:gravity="center"
-                        android:layout_marginTop="8dp" />
+                        android:text="@string/parche_firewall"
+                        android:textColor="#ffffff"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -285,12 +285,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Celda de Energía"
-                        android:textColor="#ffffff"
-                        android:textSize="10sp"
+                        android:layout_marginTop="8dp"
                         android:fontFamily="monospace"
                         android:gravity="center"
-                        android:layout_marginTop="8dp" />
+                        android:text="@string/celda_energia"
+                        android:textColor="#ffffff"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -331,12 +331,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nano Reparador"
-                        android:textColor="#ffffff"
-                        android:textSize="10sp"
+                        android:layout_marginTop="8dp"
                         android:fontFamily="monospace"
                         android:gravity="center"
-                        android:layout_marginTop="8dp" />
+                        android:text="@string/nano_reparador"
+                        android:textColor="#ffffff"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -365,35 +365,35 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:gravity="center"
+                android:orientation="vertical"
                 android:padding="8dp">
 
                 <TextView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:text="💎"
-                    android:textSize="24sp"
+                    android:background="@drawable/item_background_yellow"
                     android:gravity="center"
-                    android:background="@drawable/item_background_yellow" />
+                    android:text="💎"
+                    android:textSize="24sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Núcleo Cuántico"
-                    android:textColor="#ffffff"
-                    android:textSize="10sp"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="monospace"
                     android:gravity="center"
-                    android:layout_marginTop="8dp" />
+                    android:text="@string/nucleo_cuantico"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
                     android:text="⬡ x1"
                     android:textColor="#ffcc00"
-                    android:textSize="8sp"
-                    android:fontFamily="monospace" />
+                    android:textSize="8sp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -422,32 +422,32 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="[COMPILADOR DE CÓDIGO]"
+                        android:fontFamily="monospace"
+                        android:text="@string/compilador_codigo"
                         android:textColor="#00ff00"
                         android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:fontFamily="monospace" />
+                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/btnCompilar"
                         android:layout_width="wrap_content"
                         android:layout_height="36dp"
-                        android:text="+ COMPILAR"
-                        android:textColor="#00ff00"
-                        android:textSize="12sp"
                         android:background="@drawable/button_outline_green"
-                        android:paddingHorizontal="16dp" />
+                        android:paddingHorizontal="16dp"
+                        android:text="@string/compilar"
+                        android:textColor="#00ff00"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Selecciona 2 o más fragmentos para crear nuevas habilidades"
-                    android:textColor="#888888"
-                    android:textSize="12sp"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="monospace"
-                    android:layout_marginTop="8dp" />
+                    android:text="@string/info_compilador"
+                    android:textColor="#888888"
+                    android:textSize="12sp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -464,22 +464,22 @@
                 android:id="@+id/btnLimpiarSeleccion"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:text="LIMPIAR SELECCIÓN"
-                android:textColor="#ff3366"
-                android:textSize="12sp"
-                android:background="@drawable/button_outline_red"
                 android:layout_marginEnd="16dp"
-                android:paddingHorizontal="24dp" />
+                android:background="@drawable/button_outline_red"
+                android:paddingHorizontal="24dp"
+                android:text="@string/limpiar_seleccion"
+                android:textColor="#ff3366"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btnVolverAlJuego"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:text="VOLVER AL JUEGO"
-                android:textColor="#00ffff"
-                android:textSize="12sp"
                 android:background="@drawable/button_outline_cyan"
-                android:paddingHorizontal="24dp" />
+                android:paddingHorizontal="24dp"
+                android:text="@string/volver_al_juego"
+                android:textColor="#00ffff"
+                android:textSize="12sp" />
 
         </LinearLayout>
 

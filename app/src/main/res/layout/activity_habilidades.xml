@@ -19,24 +19,24 @@
             android:id="@+id/btn_volver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="← VOLVER"
-            android:textColor="#00FFFF"
-            android:textSize="14sp"
             android:background="@drawable/border_cyan"
-            android:padding="8dp"
             android:clickable="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:padding="8dp"
+            android:text="@string/volver"
+            android:textColor="#00FFFF"
+            android:textSize="14sp" />
 
         <!-- Título -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="[ÁRBOL DE HABILIDADES]"
+            android:gravity="center"
+            android:text="@string/arbol_habilidades"
             android:textColor="#00FFFF"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:gravity="center" />
+            android:textStyle="bold" />
 
         <!-- Info Nivel y Skills -->
         <LinearLayout
@@ -48,14 +48,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nivel: 1"
+                android:text="@string/nivel"
                 android:textColor="#00FFFF"
                 android:textSize="12sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Skills: 2"
+                android:text="@string/skills"
                 android:textColor="#00FFFF"
                 android:textSize="12sp" />
 
@@ -70,10 +70,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/header_layout"
         android:layout_centerHorizontal="true"
-        android:text="XP Disponible: 0"
+        android:padding="8dp"
+        android:text="@string/xp"
         android:textColor="#00FFFF"
-        android:textSize="14sp"
-        android:padding="8dp" />
+        android:textSize="14sp" />
 
     <!-- Contenedor principal del árbol -->
     <ScrollView
@@ -355,18 +355,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selecciona una habilidad"
+            android:gravity="center"
+            android:text="@string/informacion"
             android:textColor="#00FFFF"
-            android:textSize="12sp"
-            android:gravity="center" />
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="para ver los detalles"
+            android:gravity="center"
+            android:text="@string/informacion_2"
             android:textColor="#00FFFF"
-            android:textSize="12sp"
-            android:gravity="center" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -397,7 +397,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ofensivo"
+                android:text="@string/ofensivo"
                 android:textColor="#00FFFF"
                 android:textSize="12sp" />
 
@@ -420,7 +420,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Defensivo"
+                android:text="@string/defensivo"
                 android:textColor="#00FFFF"
                 android:textSize="12sp" />
 
@@ -442,7 +442,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Soporte"
+                android:text="@string/soporte"
                 android:textColor="#00FFFF"
                 android:textSize="12sp" />
 
